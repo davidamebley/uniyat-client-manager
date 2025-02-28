@@ -32,7 +32,7 @@ namespace prjUniyatProject1
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace prjUniyatProject1
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
@@ -114,7 +114,7 @@ namespace prjUniyatProject1
                         listItem.SubItems.Add(myDataReader.GetString(1));
                         listItem.SubItems.Add(myDataReader.GetString(2));
                         listItem.SubItems.Add(myDataReader.GetString(4));
-                        if (myDataReader.GetBoolean(5)==true)
+                        if (myDataReader.GetBoolean(5) == true)
                         {
                             listItem.SubItems.Add("Active");
                         }
@@ -146,7 +146,7 @@ namespace prjUniyatProject1
 
         private void frmUsers_Activated(object sender, EventArgs e)
         {
-            if (UserClass.isUserTableChanged==true)
+            if (UserClass.isUserTableChanged == true)
             {
                 PopulateListView();
             }
@@ -159,7 +159,7 @@ namespace prjUniyatProject1
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnModify_Click_1(object sender, EventArgs e)
@@ -173,16 +173,14 @@ namespace prjUniyatProject1
                 changeUserId = listView1.SelectedItems[0].SubItems[0].Text.ToString();
                 ChangeUserClass.userId = changeUserId;
                 frmModifyUser ModifyUserForm = new frmModifyUser();
-                ModifyUserForm.ShowDialog(new frmUsers());
+                ModifyUserForm.ShowDialog(this);
             }
         }
 
         private void btnAddNew_Click_1(object sender, EventArgs e)
         {
-            frmUsers UsersForm = new frmUsers();
             AddUserForm = new frmAddUser();
-            AddUserForm.ShowDialog(UsersForm);
-            UsersForm.Hide();
+            AddUserForm.ShowDialog(this);
         }
     }
 }
