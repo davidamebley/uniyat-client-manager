@@ -24,7 +24,7 @@ jobs:
     
     - name: Build solution
       # If your solution is named differently, update the path below
-      run: msbuild .\prjUniyatProject1.sln /p:Configuration=Release
+      run: msbuild .\uniyat-client-manager.sln /p:Configuration=Release
       shell: pwsh
 
     - name: Upload build artifacts
