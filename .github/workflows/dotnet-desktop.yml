@@ -1,0 +1,34 @@
+name: Build .NET Framework WinForms
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    # OPTIONAL: If project uses newer frameworks than .NET 4.5.2,
+    # you might install Developer Packs here, e.g.:
+    # - name: Install .NET Framework 4.8 Developer Pack
+    #   run: choco install netfx-4.8-devpack --ignore-checksums -y
+    
+    - name: Build solution
+      # If your solution is named differently, update the path below
+      run: msbuild .\prjUniyatProject1.sln /p:Configuration=Release
+      shell: pwsh
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ReleaseBuild
+        path: prjUniyatProject1\bin\Release
