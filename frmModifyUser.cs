@@ -83,7 +83,7 @@ namespace prjUniyatProject1
         string GetUserType()
         {
             MySqlConnection dbConnection = new MySqlConnection(conStr);
-            string dbQuery = "SELECT `user_type`, `is_user_active` FROM user WHERE `user_id` = '"+userId+"'";
+            string dbQuery = "SELECT `user_type`, `is_user_active` FROM user WHERE `user_id` = '" + userId + "'";
             MySqlCommand dbCommand = new MySqlCommand(dbQuery, dbConnection);
             string tempUserType = "";
 
@@ -123,7 +123,7 @@ namespace prjUniyatProject1
                 this.Dispose();
                 UserClass.isUserTableChanged = true;
             }
-            
+
         }
 
 
@@ -133,8 +133,12 @@ namespace prjUniyatProject1
             userActiveState = Convert.ToBoolean(chkUserActive.CheckState);
             userType = cboUserType.SelectedItem.ToString();
             MySqlConnection dbConnection = new MySqlConnection(conStr);
-            string updateQuery = "UPDATE `user` SET `user_type` = '" + userType + "', `is_user_active` = '"+userActiveState+"' WHERE user_id = '"+userId+"'";
+            string updateQuery = "UPDATE `user` SET `user_type` = @userType, `is_user_active` = @isActive WHERE user_id = @userId";
+
             MySqlCommand updateCommand = new MySqlCommand(updateQuery, dbConnection);
+            updateCommand.Parameters.AddWithValue("@userType", userType);
+            updateCommand.Parameters.AddWithValue("@isActive", userActiveState ? 1 : 0);
+            updateCommand.Parameters.AddWithValue("@userId", userId);
 
             updateCommand.CommandTimeout = 60;
             try
